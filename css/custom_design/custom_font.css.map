@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "custom_font.scss"
+    ],
+    "names": [],
+    "file": "custom_font.css"
+}
