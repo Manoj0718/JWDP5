@@ -27,7 +27,7 @@
                 <span class="navbar-toggler-icon "></span>
             </button>
 
-            <a class="navbar-brand mx-auto" href="#">
+            <a class="navbar-brand mx-auto" href="/html_pages/All_Product.html">
                 <img src="/images/Orinoco logo.png" width="125px" height="50px" alt="vintage camera" loading="lazy">
             </a>
             <a href="/html_pages/cart_page.html"> <span id="cart_count">0</span>
@@ -43,7 +43,7 @@
                         <a class="nav-link" href="All_Product.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Shop</a>
+                        <a class="nav-link" href="All_Product.html">Shop</a>
                     </li>
                 </ul>
             </div>
@@ -58,45 +58,32 @@
             <div class="card col-12 p-2">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <!-- remove src to add pic from javascript -->
                         <img class="card-img" id="image">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <h2 class="card-title" id="single_Product_Name"></h2>
                             <p class="card-text" id="text_Product"> </p>
-
                         </div>
+
                         <!-- buy tab -->
                         <div class="col-12">
                             <a href="#" class="btn  btn-primary" id="buy_Button"> Add To Cart </a>
-                            <a href=" #" class="btn  btn-outline-primary"> <span class="text" id="buy_Button">Buy now
-                                </span> <i class="fas fa-shopping-cart"></i>
-                            </a>
                         </div>
                         <!-- -------------------- -->
                         <div class="form-group col-md-6" id="lenses_Array">
                             <label> Select Your Lense </label>
-                            <select class="form-control" id="lensessell" > </select>
+                            <select class="form-control" id="lensessell">
+                                <option value="0">-Select-</option>
+                            </select>
                         </div>
 
                         <!-- -------------- -->
                         <!-- price-detail .// -->
                         <div class="mb-3 text-center">
                             <h5 class="card-text" id="Product_Price"></h5>
-
                         </div>
-                        <!-- quntity and customization -->
                         <hr>
-                        <!-- <div class="form-row col-10"> -->
-                        <!-- <div class="form-group col-md-6 ">
-                                <label>Quantity</label>
-                                <!-- i controlled the input value from html 
-                                useing min = "" -->
-                        <!-- <input type="number" class="count" value='1' min="0" id="Qty_input"> -->
-
-                        <!-- </div> -->
-                        <!-- </div> -->
                     </div>
                 </div>
             </div>
