@@ -14,8 +14,42 @@
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col border border-primary p-2 m-2"></div>
+        <div class="row p-2">
+            <div class="col-12">
+                <h2 class="text-center pb-4">Customer Thank You Page</h2>
+            </div>
+            <div class="col-4 pb-4">
+                <p> Id : </p>
+                <p>Name : </p>
+                <p> Family Name : </p>
+                <p> Address : </p>
+                <p> City : </p>
+                <p>Email : </p>
+                <p id="response-cart"></p>
+            </div>
+            <div class="col-8 pb-4">
+                <p id="response-id"></small>
+                <p id="response-name"></p>
+                <p id="Second_name"></p>
+                <p id="response-Address"></p>
+                <p id="response-city"></p>
+                <p id="response-email"></p>
+                <p id="response-cart"></p>
+            </div>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody id="table">
+                    <!-- here goes javascript cart -->
+                </tbody>
+            </table>
+            <div class="col-12 pt-2 bg-light m-1 text-center">Your Total : $ <span id="total_text"></span></div>
+
         </div>
     </div>
 

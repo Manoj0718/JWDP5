@@ -8,6 +8,7 @@ cartCountDom.textContent = cart.length;
 
 let shoppingTable = document.getElementById("shopping_cart_table")
 let totalColumn = document.getElementById("total_column");
+let text = document.getElementById('text');
 
 //<//--updateing total prize->//
 
@@ -29,10 +30,11 @@ window.onload = showpage();
 function showpage() {
     if (cart.length === 0) {
         shoppingTable.style.visibility = 'hidden';
-        totalColumn.innerHTML =
-            `<h4 class="text-uppercase text-success"> no items in the cart,go to our
-      <a href="#" class="stretched-link text-danger">SHOP</a>
+        text.innerHTML =
+            `<h4 class="text-uppercase text-center"> no items in the cart,go to our
+      <a href="http://127.0.0.1:5500/html_pages/All_Product.html" class="stretched-link text-danger">SHOP</a>
      </p> </h4 > `
+
     } else {
         // creating the table 
         cart.forEach(function (object) {
@@ -64,7 +66,6 @@ shoppingTable.onchange = function ($event) {
         updateingItem.qty = targetValue;
         updateingItem.total = updateingItem.qty * parseInt(updateingItem.price);
         localStorage.setItem("productArray", JSON.stringify(cart));
-        //location.reload();
     }
     totalCost();
 };
@@ -74,9 +75,10 @@ shoppingTable.onchange = function ($event) {
 function totalCost() {
     let sum = cart.map(o => o.total).reduce((a, c) => { return a + c });
     grandTotal.textContent = "$" + " " + sum.toFixed(2);
+    localStorage.setItem("Grand Total", sum.toFixed(2));
 };
 
-//----------------------------------
+//-------------------------------------------------------------------------------------------
 //------------- start remove button ---------------//
 shoppingTable.onclick = function (event) {
     if (event.target && event.target.classList.contains('remove')) {
@@ -116,15 +118,6 @@ let zip = document.getElementById("inputZip");
 let submit_button = document.getElementById("submit_button");
 let email = document.getElementById("exampleInputEmail1");
 
-//response DOM
-let responseId = document.getElementById("response-id");
-let responseName = document.getElementById("response-name");
-let responseAddress = document.getElementById('response-Address');
-let responseCart = document.getElementById('response-cart');
-let responseCity = document.getElementById('response-city');
-let responseSecond_name = document.getElementById("Second_name");
-let responseMassage = document.getElementById("response-massage");
-let responseEmail = document.getElementById("response-email");
 //------------------------------------------------------------
 // JSON request containing a contact object and a products array
 //{contact : {contact}, cart:[{cart 01}, {cart 02}]}
@@ -132,12 +125,11 @@ let responseEmail = document.getElementById("response-email");
 
 submit_button.addEventListener('click', ($event) => {
     $event.preventDefault();
+    localStorage.removeItem('productArray'); // submit click remove cart
 
     let cartIds = cart.map(x => x._id);
     // console.log(cartIds);
-
     const postSubmit = {
-
         contact: {
             firstName: firstName.value,
             lastName: lastname.value,
@@ -146,13 +138,12 @@ submit_button.addEventListener('click', ($event) => {
             email: email.value,
         },
         orderId: "",
-        products: cartIds
+        products: cartIds,
     }
     //console.log(postSubmit);
     contactForm(postSubmit);
+    //window.location.replace("http://127.0.0.1:5500/html_pages/customer_thank.html"); return false;
 });
-
-
 
 function makeRequest(data) {
     return new Promise((resolve, rejection) => {
@@ -169,13 +160,10 @@ function makeRequest(data) {
                 }
             }
         };
-
-        //JSON request containing a contact object and a
-        //products array
+        //JSON request containing a contact object and a products array
         postRequest.setRequestHeader('Content-Type', 'application/json');
         postRequest.send(JSON.stringify(data));
     });
-
 };
 //------------------------------------
 // Returns contact object, products array and orderId (string)
@@ -184,28 +172,20 @@ function makeRequest(data) {
 
 async function contactForm(postSubmit) {
     try {
-        // postSubmit argument
+        // postSubmit argument &   set in localstorage
         const promiserequest = makeRequest(postSubmit);
         const response = await promiserequest;
         console.log(response);
-        console.log(response.products);
-        responseId.textContent = "Here is youe order No : " + response.orderId;
-        responseName.textContent = "Customer First name : " + postSubmit.contact.firstName;
-        responseSecond_name.textContent = "Customer second name : " + postSubmit.contact.lastName;
-        responseAddress.textContent = "Customer addres: " + postSubmit.contact.address;
-        responseCity.textContent = "Customer city: " + postSubmit.contact.city;
-        responseEmail.textContent = "Customer Email : " + postSubmit.contact.email;
-        responseMassage.textContent = response.contact.products;
-        console.log(response.products);
-        for (let i in response.products) {
-            console.log(i.name);
-        }
-
+        let orderConfirmation = JSON.stringify(response);
+        localStorage.setItem("OrderConfirmation", orderConfirmation);
     }
     catch (errorMassage) {
         responseMassage.textContent = errorMassage;
         console.log(errorMassage);
     }
+    window.location.replace("http://127.0.0.1:5500/html_pages/customer_thank.html"); return false;
+
 };
+
 
 
