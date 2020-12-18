@@ -1,3 +1,5 @@
+// const { parse } = require("uuid");
+
 let cart = JSON.parse(localStorage.getItem('productArray')) || [];
 
 // /--------updateing cart counter----/
@@ -57,27 +59,30 @@ function showpage() {
 // update quentity
 
 shoppingTable.onchange = function ($event) {
+    let updateingItem;
     if ($event.target && $event.target.classList.contains("input_value")) {
         let targetValue = $event.target.value;
         targetValue = parseInt(targetValue);
         let ItemName = $event.target.dataset.name;
         let Itemlense = $event.target.dataset.lense;
-        const updateingItem = cart.find(item => item.name === ItemName && Itemlense == item.lense);
+        updateingItem = cart.find(item => item.name === ItemName && Itemlense == item.lense);
         updateingItem.qty = targetValue;
+        let itemText = $event.target.parentElement.parentElement.lastChild;
         updateingItem.total = updateingItem.qty * parseInt(updateingItem.price);
+        itemText.textContent = "$" + updateingItem.total.toFixed(2);
         localStorage.setItem("productArray", JSON.stringify(cart));
+
     }
     totalCost();
 };
 //------------------------------------------------
 // update Total cost
-
 function totalCost() {
     let sum = cart.map(o => o.total).reduce((a, c) => { return a + c });
     grandTotal.textContent = "$" + " " + sum.toFixed(2);
     localStorage.setItem("Grand Total", sum.toFixed(2));
+    //     
 };
-
 //-------------------------------------------------------------------------------------------
 //------------- start remove button ---------------//
 shoppingTable.onclick = function (event) {

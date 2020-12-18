@@ -35,7 +35,7 @@ function showProducts() {
         let tr = document.createElement('tr');
         tr.innerHTML = `<td> <img src=${pic} width ="86px" height ="86px">  </td> 
             <td>${name}</td>
-             <td>${price}</td>`
+             <td>$ ${price.toFixed(2)}</td>`
         table.appendChild(tr);
     }
 
